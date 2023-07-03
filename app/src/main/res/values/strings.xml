@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">My mp3 player</string>
+    <string name="shuffle">Shuffle</string>
+    <string name="close">Close</string>
+    <string name="next_song">Next song</string>
+    <string name="stop">stop</string>
+    <string name="previous_song">previous song</string>
+    <string name="_0_00">0:00</string>
+    <string name="title_of_the_song">song name</string>
+    <string name="author">author</string>
+    <string name="song_image_or_funny_cat">song image or funny cat</string>
+    <string name="no_music_found_on_this_device">No music found on this device</string>
+</resources>
