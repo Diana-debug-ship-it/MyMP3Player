@@ -18,6 +18,9 @@ public class MusicPlayerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_music_player);
+        initViews();
+
+
     }
 
     private void initViews(){
@@ -27,6 +30,11 @@ public class MusicPlayerActivity extends AppCompatActivity {
         tvTotalTime = findViewById(R.id.total_time);
 
         seekBar = findViewById(R.id.seek_bar);
+
+        ivPlayNext = findViewById(R.id.next);
+        ivPlayPrev = findViewById(R.id.previous);
+        ivPlayStop = findViewById(R.id.pause_play);
+        ivMusicIcon = findViewById(R.id.music_icon_big);
     }
 
 }
