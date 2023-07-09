@@ -1,4 +1,4 @@
-package com.example.mymp3player;
+package com.example.mymp3player.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,9 +6,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.mymp3player.Constants;
+import com.example.mymp3player.R;
+import com.example.mymp3player.Song;
 
 public class SongsAdapter extends ListAdapter<Song, SongsAdapter.SongsViewHolder> {
 
@@ -18,15 +21,19 @@ public class SongsAdapter extends ListAdapter<Song, SongsAdapter.SongsViewHolder
         this.onSongClickListener = onSongClickListener;
     }
 
-    protected SongsAdapter(SongDiffUtilCallback diffCallback) {
+    public SongsAdapter(SongDiffUtilCallback diffCallback) {
         super(diffCallback);
     }
 
     @NonNull
     @Override
     public SongsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        int layoutSource;
+        if (viewType == Constants.TYPE_ACTIVE) layoutSource = R.layout.item_song_active;
+        else if (viewType == Constants.TYPE_INACTIVE) layoutSource = R.layout.item_song_disabled;
+        else throw new RuntimeException("view type is absent");
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_song_active,
+                .inflate(layoutSource,
                         parent,
                         false);
         return new SongsViewHolder(view);
@@ -37,15 +44,22 @@ public class SongsAdapter extends ListAdapter<Song, SongsAdapter.SongsViewHolder
         Song song = getItem(position);
         holder.tvName.setText(song.getTitle());
         holder.tvArtist.setText(song.getArtist());
+        int finalPosition = position;
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (onSongClickListener!=null) {
-                    onSongClickListener.onSongClick();
+                if (onSongClickListener != null) {
+                    onSongClickListener.onSongClick(holder.itemView, finalPosition);
                 }
             }
         });
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (getItem(position).isPlaying()) return Constants.TYPE_ACTIVE;
+        else return Constants.TYPE_INACTIVE;
     }
 
     public class SongsViewHolder extends RecyclerView.ViewHolder {
@@ -61,7 +75,7 @@ public class SongsAdapter extends ListAdapter<Song, SongsAdapter.SongsViewHolder
         }
     }
 
-    public interface OnSongClickListener{
-        void onSongClick();
+    public interface OnSongClickListener {
+        void onSongClick(View view, int index);
     }
 }

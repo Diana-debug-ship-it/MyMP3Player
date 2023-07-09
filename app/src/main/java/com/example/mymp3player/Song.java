@@ -11,6 +11,7 @@ public class Song implements Parcelable {
     private String title;
     private String artist;
     private String duration;
+    private boolean isPlaying;
 
     public Song(long id, String data, String title, String artist, String duration) {
         this.id = id;
@@ -18,6 +19,7 @@ public class Song implements Parcelable {
         this.title = title;
         this.artist = artist;
         this.duration = duration;
+        this.isPlaying = false;
     }
 
     protected Song(Parcel in) {
@@ -26,6 +28,7 @@ public class Song implements Parcelable {
         title = in.readString();
         artist = in.readString();
         duration = in.readString();
+        isPlaying = in.readByte() != 0;
     }
 
     @Override
@@ -35,6 +38,7 @@ public class Song implements Parcelable {
         dest.writeString(title);
         dest.writeString(artist);
         dest.writeString(duration);
+        dest.writeByte((byte) (isPlaying ? 1 : 0));
     }
 
     @Override
@@ -94,18 +98,15 @@ public class Song implements Parcelable {
         this.duration = duration;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Song song = (Song) o;
-        return id == song.id && Objects.equals(data, song.data) && Objects.equals(title, song.title) && Objects.equals(artist, song.artist) && Objects.equals(duration, song.duration);
+    public boolean isPlaying() {
+        return isPlaying;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, data, title, artist, duration);
+    public void setPlaying(boolean playing) {
+        isPlaying = playing;
     }
+
+
 
     @Override
     public String toString() {
@@ -115,6 +116,7 @@ public class Song implements Parcelable {
                 ", title='" + title + '\'' +
                 ", artist='" + artist + '\'' +
                 ", duration='" + duration + '\'' +
+                ", isPlaying=" + isPlaying +
                 '}';
     }
 }

@@ -1,7 +1,9 @@
-package com.example.mymp3player;
+package com.example.mymp3player.adapters;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
+
+import com.example.mymp3player.Song;
 
 public class SongDiffUtilCallback extends DiffUtil.ItemCallback<Song> {
     @Override
