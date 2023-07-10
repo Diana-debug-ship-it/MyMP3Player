@@ -10,4 +10,9 @@
     <string name="author">author</string>
     <string name="song_image_or_funny_cat">song image or funny cat</string>
     <string name="no_music_found_on_this_device">No music found on this device</string>
+    <string name="start_playing">Начать воспроизведение</string>
+    <string name="music_on_your_device">Music on your device</string>
+    <string name="requesting_permission">Requesting permission</string>
+    <string name="allow_the_application_to_fetch_songs_from_your_device">Allow the application to fetch songs from your device</string>
+    <string name="search">Search</string>
 </resources>

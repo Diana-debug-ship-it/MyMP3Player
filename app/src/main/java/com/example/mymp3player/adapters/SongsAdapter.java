@@ -1,8 +1,10 @@
 package com.example.mymp3player.adapters;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -44,8 +46,15 @@ public class SongsAdapter extends ListAdapter<Song, SongsAdapter.SongsViewHolder
         Song song = getItem(position);
         holder.tvName.setText(song.getTitle());
         holder.tvArtist.setText(song.getArtist());
-        int finalPosition = position;
+        Uri artwork = song.getArtworkUri();
+        if (artwork!=null) {
+            holder.ivArtwork.setImageURI(artwork);
+            if (holder.ivArtwork.getDrawable()==null) {
+                holder.ivArtwork.setImageResource(R.drawable.cat);
+            }
+        }
 
+        int finalPosition = position;
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,12 +75,14 @@ public class SongsAdapter extends ListAdapter<Song, SongsAdapter.SongsViewHolder
 
         private TextView tvName;
         private TextView tvArtist;
+        private ImageView ivArtwork;
 
         public SongsViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvName = itemView.findViewById(R.id.tvName);
             tvArtist = itemView.findViewById(R.id.tvArtist);
+            ivArtwork = itemView.findViewById(R.id.ivArtwork);
         }
     }
 

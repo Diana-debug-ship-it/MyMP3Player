@@ -3,7 +3,10 @@
     <style name="Base.Theme.MyMp3Player" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:textColor">#fff</item>
     </style>
 
-    <style name="Theme.MyMp3Player" parent="Base.Theme.MyMp3Player" />
+    <style name="Theme.MyMp3Player" parent="Base.Theme.MyMp3Player">
+        <item name="android:textColor">#fff</item>
+    </style>
 </resources>

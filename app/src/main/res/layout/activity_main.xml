@@ -4,16 +4,89 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".MainActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_margin="5dp"
+        android:background="@color/dark_purple"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        android:fontFamily="@font/permanent_marker"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:fontFamily="@font/permanent_marker"
+            android:layout_height="?attr/actionBarSize"
+            app:menu="@menu/main_menu"
+            app:titleTextColor="@color/light_purple" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/tvMusic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/permanent_marker"
+        android:paddingStart="20dp"
+        android:paddingTop="20dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="10dp"
+        android:text="@string/music_on_your_device"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appBar" />
+
+    <LinearLayout
+        android:id="@+id/actions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvMusic">
+
+        <TextView
+            android:id="@+id/ivPlay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/start_playing"
+            android:textColor="@color/white"
+            android:textStyle="italic"
+            app:drawableLeftCompat="@drawable/baseline_play_circle_outline_24" />
+
+        <TextView
+            android:id="@+id/ivShuffle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Перемешать"
+            android:textColor="@color/white"
+            android:textStyle="italic"
+            app:drawableLeftCompat="@drawable/baseline_shuffle_24" />
+
+
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSongs"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/actions"
         tools:listitem="@layout/item_song_disabled" />
 
     <TextView
@@ -23,6 +96,7 @@
         android:fontFamily="casual"
         android:text="@string/no_music_found_on_this_device"
         android:textAlignment="center"
+        android:textColor="@color/white"
         android:textSize="23sp"
         android:textStyle="bold"
         android:visibility="gone"

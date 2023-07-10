@@ -1,5 +1,6 @@
 package com.example.mymp3player;
 
+import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -7,37 +8,45 @@ import java.util.Objects;
 
 public class Song implements Parcelable {
     private long id;
-    private String data;
     private String title;
     private String artist;
-    private String duration;
+    private Uri uri;
+    private Uri artworkUri;
+    private int duration;
+    private int size;
     private boolean isPlaying;
 
-    public Song(long id, String data, String title, String artist, String duration) {
+    public Song(long id, String title, String artist, Uri uri, int duration, int size) {
         this.id = id;
-        this.data = data;
         this.title = title;
         this.artist = artist;
+        this.uri = uri;
         this.duration = duration;
+        this.size = size;
+        this.artworkUri = null;
         this.isPlaying = false;
     }
 
     protected Song(Parcel in) {
         id = in.readLong();
-        data = in.readString();
         title = in.readString();
         artist = in.readString();
-        duration = in.readString();
+        uri = in.readParcelable(Uri.class.getClassLoader());
+        artworkUri = in.readParcelable(Uri.class.getClassLoader());
+        duration = in.readInt();
+        size = in.readInt();
         isPlaying = in.readByte() != 0;
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(id);
-        dest.writeString(data);
         dest.writeString(title);
         dest.writeString(artist);
-        dest.writeString(duration);
+        dest.writeParcelable(uri, flags);
+        dest.writeParcelable(artworkUri, flags);
+        dest.writeInt(duration);
+        dest.writeInt(size);
         dest.writeByte((byte) (isPlaying ? 1 : 0));
     }
 
@@ -66,14 +75,6 @@ public class Song implements Parcelable {
         this.id = id;
     }
 
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
-    }
-
     public String getTitle() {
         return title;
     }
@@ -90,12 +91,36 @@ public class Song implements Parcelable {
         this.artist = artist;
     }
 
-    public String getDuration() {
+    public Uri getUri() {
+        return uri;
+    }
+
+    public void setUri(Uri uri) {
+        this.uri = uri;
+    }
+
+    public Uri getArtworkUri() {
+        return artworkUri;
+    }
+
+    public void setArtworkUri(Uri artworkUri) {
+        this.artworkUri = artworkUri;
+    }
+
+    public int getDuration() {
         return duration;
     }
 
-    public void setDuration(String duration) {
+    public void setDuration(int duration) {
         this.duration = duration;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
     }
 
     public boolean isPlaying() {
@@ -106,17 +131,18 @@ public class Song implements Parcelable {
         isPlaying = playing;
     }
 
-
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Song song = (Song) o;
+        return id == song.id && duration == song.duration && size == song.size && isPlaying == song.isPlaying && Objects.equals(title, song.title) && Objects.equals(artist, song.artist) && Objects.equals(uri, song.uri) && Objects.equals(artworkUri, song.artworkUri);
+    }
 
     @Override
-    public String toString() {
-        return "Song{" +
-                "id=" + id +
-                ", data='" + data + '\'' +
-                ", title='" + title + '\'' +
-                ", artist='" + artist + '\'' +
-                ", duration='" + duration + '\'' +
-                ", isPlaying=" + isPlaying +
-                '}';
+    public int hashCode() {
+        return Objects.hash(id, title, artist, uri, artworkUri, duration, size, isPlaying);
     }
+
+
 }
