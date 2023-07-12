@@ -10,4 +10,5 @@ public class Constants {
     public static final int TAG_SONGS_NOT_EQUAL = 0;
 
     public static final String URI_ARTWORK = "content://media//external/audio/albumart";
+
 }

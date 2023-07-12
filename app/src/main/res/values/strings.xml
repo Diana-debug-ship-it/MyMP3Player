@@ -15,4 +15,6 @@
     <string name="requesting_permission">Requesting permission</string>
     <string name="allow_the_application_to_fetch_songs_from_your_device">Allow the application to fetch songs from your device</string>
     <string name="search">Search</string>
+    <string name="repeat_playlist">repeat playlist</string>
+    <string name="go_to_playlist">go to playlist</string>
 </resources>

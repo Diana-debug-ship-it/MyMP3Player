@@ -14,17 +14,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mymp3player.Constants;
 import com.example.mymp3player.R;
 import com.example.mymp3player.Song;
+import com.google.android.exoplayer2.ExoPlayer;
 
 public class SongsAdapter extends ListAdapter<Song, SongsAdapter.SongsViewHolder> {
 
     private OnSongClickListener onSongClickListener;
+    private ExoPlayer player;
 
     public void setOnSongClickListener(OnSongClickListener onSongClickListener) {
         this.onSongClickListener = onSongClickListener;
     }
 
-    public SongsAdapter(SongDiffUtilCallback diffCallback) {
+    public SongsAdapter(SongDiffUtilCallback diffCallback, ExoPlayer exoPlayer) {
         super(diffCallback);
+        this.player = exoPlayer;
     }
 
     @NonNull
